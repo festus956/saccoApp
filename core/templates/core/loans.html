@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Loans — saccoApp</title>
+</head>
+<body>
+    <h1>My Loans</h1>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if loans %}
+        <table border="1" cellpadding="6">
+            <tr>
+                <th>Applied</th>
+                <th>Approved</th>
+                <th>Interest Rate</th>
+                <th>Status</th>
+                <th>Repaid</th>
+                <th>Balance</th>
+            </tr>
+            {% for loan in loans %}
+            <tr>
+                <td>{{ loan.amount_applied }}</td>
+                <td>{{ loan.amount_approved }}</td>
+                <td>{{ loan.interest_rate }}%</td>
+                <td>{{ loan.get_status_display }}</td>
+                <td>{{ loan.total_repaid }}</td>
+                <td>{{ loan.balance }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No loan records found.</p>
+    {% endif %}
+
+    <p><a href="{% url 'home' %}">Back to home</a></p>
+</body>
+</html>

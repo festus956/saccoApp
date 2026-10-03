@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home — saccoApp</title>
+</head>
+<body>
+    <h1>Member Dashboard</h1>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if member %}
+        <h2>Welcome, {{ member.first_name }} {{ member.last_name }}</h2>
+        <p>Member No: {{ member.member_no }}</p>
+        <p>Status: {{ member.get_status_display }}</p>
+        <p>Total shares: {{ member.total_shares_amount }}</p>
+        <p>Total deposits: {{ member.total_deposits }}</p>
+        <p><a href="{% url 'loans' %}">View my loans</a></p>
+    {% else %}
+        <p>No member profile is linked to this account. Please contact the SACCO office.</p>
+    {% endif %}
+
+    <p><a href="{% url 'logout' %}">Log out</a></p>
+</body>
+</html>
